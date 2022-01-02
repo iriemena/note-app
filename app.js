@@ -1,6 +1,5 @@
 const addNew = document.querySelector(".add-note");
 const search = document.querySelector("input");
-const searchBtn = document.querySelector(".search-btn");
 
 const getItem = JSON.parse(localStorage.getItem("note"));
 if (getItem) {
@@ -18,7 +17,6 @@ function addNote(text = "") {
   notes.classList = "notes";
 
   notes.innerHTML = `
-  
       <div class="note-header">
         <i class="fa fa-plus" aria-hidden="true" id="add"></i>
         <i class="fa fa-times" aria-hidden="true" id="close"></i>
@@ -27,7 +25,7 @@ function addNote(text = "") {
         <button class="save"><i class="fas fa-check"></i></button>
         <button class="edit hidden"><i class="fas fa-edit"></i></button>
         <textarea>${text}</textarea>
-        <div class="main-text hidden"></div> 
+        <div class="main-text hidden">${text}</div> 
       </div>
   `;
 
@@ -36,23 +34,6 @@ function addNote(text = "") {
   const mainText = notes.querySelector(".main-text");
   const textArea = notes.querySelector("textarea");
   const close = notes.querySelector("#close");
-
-  searchBtn.addEventListener("click", () => {
-    const getItem = JSON.parse(localStorage.getItem("note"));
-    const value = search.value;
-
-    // getItem.forEach((item) => {
-    //   console.log(item.indexOf);
-    // });
-    const noteValue = document.querySelector(".notes");
-    console.log(Array.from(noteValue));
-    console.log(getItem.indexOf(value));
-    if (getItem.indexOf(value) != -1) {
-      noteValue.style.display = "block";
-    } else {
-      noteValue.style.display = "none";
-    }
-  });
 
   save.addEventListener("click", () => {
     mainText.classList.toggle("hidden");
@@ -79,29 +60,37 @@ function addNote(text = "") {
 
   close.addEventListener("click", () => {
     notes.remove();
-    removeNote(text);
+    addLocal();
   });
 
+  // local storage
   const addLocal = () => {
     const noteText = document.querySelectorAll("textarea");
 
     const noteValue = [];
     noteText.forEach((text) => {
-      mainText.innerHTML = text.value;
       noteValue.push(text.value);
     });
 
     localStorage.setItem("note", JSON.stringify(noteValue));
   };
 
+  // Search
+  search.addEventListener("keyup", (e) => {
+    const value = e.target.value.trim();
+    const noteValue = document.querySelectorAll(".notes");
+
+    noteValue.forEach((note) => {
+      const item = note.children[1].children[2].textContent;
+      console.log(item);
+      if (note.children[1].children[2].textContent.indexOf(value) != -1) {
+        note.style.display = "block";
+      } else {
+        note.style.display = "none";
+      }
+      // addLocal();
+    });
+  });
+
   document.body.appendChild(notes);
-}
-
-function removeNote(text) {
-  const note = JSON.parse(localStorage.getItem("note"));
-
-  localStorage.setItem(
-    "note",
-    JSON.stringify(note.filter((item) => item != text))
-  );
 }
