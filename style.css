@@ -23,7 +23,7 @@ body {
   background-color: #fff;
   height: 250px;
   width: 250px;
-  margin-top: 110px;
+  margin-top: 100px;
   margin-left: 15px;
 }
 
@@ -69,48 +69,62 @@ input {
 }
 
 #close {
-  float: right;
+  color: red;
+  border: none;
+  background-color: transparent;
+  font-size: 20px;
   cursor: pointer;
 }
+
+.save,
+.edit {
+  float: right;
+  border: none;
+  background-color: transparent;
+  color: green;
+  font-size: 20px;
+}
+.edit {
+  color: rgb(62, 62, 221);
+  font-size: 18px;
+}
+
 .note-body {
   height: 100%;
   width: 100%;
   position: relative;
   overflow: hidden;
 }
+
 .main-text {
   width: 100%;
   height: 100%;
-  background-color: #fff;
+  background-color: #fffc;
   word-wrap: break-word;
   border: 0.5px solid black;
   overflow: auto;
   text-align: justify;
+  padding: 5px;
 }
 
 textarea {
   width: 100%;
   height: 100%;
-  /* outline: none; */
-  text-align: justify;
-}
-.save,
-.edit {
-  position: absolute;
-  bottom: -2rem;
-  padding: 10px;
-  margin-left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  z-index: 1;
-  cursor: pointer;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
   outline: none;
-  background-color: #9ec862;
-  color: #fff;
-  font-size: 1.2rem;
+  text-align: justify;
+  padding: 5px;
+  font-size: 12px;
 }
+
 .hidden {
   display: none;
+}
+
+@media only screen and (max-width: 500px) {
+  .notes {
+    margin-left: 50%;
+    transform: translate(-50%);
+    height: 300px;
+    width: 300px;
+  }
 }

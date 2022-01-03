@@ -18,17 +18,17 @@ function addNote(text = "") {
 
   notes.innerHTML = `
       <div class="note-header">
-        <i class="fa fa-plus" aria-hidden="true" id="add"></i>
-        <i class="fa fa-times" aria-hidden="true" id="close"></i>
-      </div>
-      <div class="note-body">
         <button class="save"><i class="fas fa-check"></i></button>
         <button class="edit hidden"><i class="fas fa-edit"></i></button>
+        <button id="close"><i class="fa fa-times" aria-hidden="true"></i></button>
+      </div>
+      <div class="note-body">
         <textarea>${text}</textarea>
         <div class="main-text hidden">${text}</div> 
       </div>
   `;
 
+  console.log(notes.children[0].children[1]);
   const save = notes.querySelector(".save");
   const edit = notes.querySelector(".edit");
   const mainText = notes.querySelector(".main-text");
@@ -75,22 +75,19 @@ function addNote(text = "") {
     localStorage.setItem("note", JSON.stringify(noteValue));
   };
 
-  // Search
-  search.addEventListener("keyup", (e) => {
-    const value = e.target.value.trim();
-    const noteValue = document.querySelectorAll(".notes");
-
-    noteValue.forEach((note) => {
-      const item = note.children[1].children[2].textContent;
-      console.log(item);
-      if (note.children[1].children[2].textContent.indexOf(value) != -1) {
-        note.style.display = "block";
-      } else {
-        note.style.display = "none";
-      }
-      // addLocal();
-    });
-  });
-
   document.body.appendChild(notes);
 }
+
+// Search
+search.addEventListener("keyup", (e) => {
+  const value = e.target.value.trim().toLowerCase();
+  const noteValue = document.querySelectorAll(".notes");
+
+  noteValue.forEach((note) => {
+    if (note.children[1].children[1].textContent.indexOf(value) != -1) {
+      note.style.display = "block";
+    } else {
+      note.style.display = "none";
+    }
+  });
+});
