@@ -23,7 +23,7 @@ function addNote(text = "") {
         <button id="close"><i class="fa fa-times" aria-hidden="true"></i></button>
       </div>
       <div class="note-body">
-        <textarea>${text}</textarea>
+        <textarea placeholder="Note something down...">${text}</textarea>
         <div class="main-text hidden">${text}</div> 
       </div>
   `;
