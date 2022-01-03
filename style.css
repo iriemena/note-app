@@ -138,4 +138,7 @@ textarea {
     padding-left: 15px;
     padding-right: 15px;
   }
+  .search-note input {
+    width: 90%;
+  }
 }
