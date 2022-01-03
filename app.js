@@ -28,7 +28,6 @@ function addNote(text = "") {
       </div>
   `;
 
-  console.log(notes.children[0].children[1]);
   const save = notes.querySelector(".save");
   const edit = notes.querySelector(".edit");
   const mainText = notes.querySelector(".main-text");
@@ -84,7 +83,11 @@ search.addEventListener("keyup", (e) => {
   const noteValue = document.querySelectorAll(".notes");
 
   noteValue.forEach((note) => {
-    if (note.children[1].children[1].textContent.indexOf(value) != -1) {
+    console.log(note.children[1].children[1]);
+    if (
+      note.children[1].children[1].textContent.toLowerCase().indexOf(value) !=
+      -1
+    ) {
       note.style.display = "block";
     } else {
       note.style.display = "none";
