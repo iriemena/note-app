@@ -1,7 +1,7 @@
 const addNew = document.querySelector(".add-note");
 const search = document.querySelector("input");
 
-const getItem = JSON.parse(localStorage.getItem("note"));
+const getItem = JSON.parse(localStorage.getItem("note")) || [];
 if (getItem) {
   getItem.forEach((text) => {
     addNote(text);
@@ -68,7 +68,10 @@ function addNote(text = "") {
 
     const noteValue = [];
     noteText.forEach((text) => {
-      noteValue.push(text.value);
+      // text.value != "" ? noteValue.push(text.value) : [];
+      if (text.value != "") {
+        noteValue.push(text.value);
+      }
     });
 
     localStorage.setItem("note", JSON.stringify(noteValue));
